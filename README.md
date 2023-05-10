@@ -2,4 +2,4 @@
 Demo
 DDBB Version Control
 Using jenkins and liquibase
-and repo in
+and repo in github

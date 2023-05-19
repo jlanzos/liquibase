@@ -6,6 +6,7 @@ pipeline {
                bat("copy c:\\Varios\\Vueling\\liquibase\\sqlite001\\mychangelog.sql c:\\Varios\\Vueling\\liquibase\\sqlite002\\mychangelog005.sql ")
                dir('c:\\Varios\\Vueling\\liquibase\\sqlite002'){
                    bat "git add *.sql"
+                   bat "git add jenkins*"
                    bat "git add -u"
                    bat "git stash save"
                    bat "git pull"

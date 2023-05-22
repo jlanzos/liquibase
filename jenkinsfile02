@@ -47,7 +47,7 @@ pipeline {
         stage('Status') {
             steps {
                 script {
-                         bat 'docker run --rm  -v https://github.com/jlanzos/liquibase/blob/main:/liquibase/changelog liquibase/liquibase --show-banner=False  --url="jdbc:sqlserver://192.168.1.139:1433;databaseName=Vueling_SAP;queryTimeout=5;trustServerCertificate=true;integratedsecurity=False;defaultSchemaName=dbo" --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=internal/lib/mssql-jdbc.jar --username=sa --password=lan000 --changelog-file=mychangelog002.sql --search-path=changelog status --verbose'
+                         bat 'docker run --rm  -v c:\\Varios\\Vueling\\liquibase\\sqlite002:/liquibase/changelog liquibase/liquibase --show-banner=False  --url="jdbc:sqlserver://192.168.1.139:1433;databaseName=Vueling_SAP;queryTimeout=5;trustServerCertificate=true;integratedsecurity=False;defaultSchemaName=dbo" --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=internal/lib/mssql-jdbc.jar --username=sa --password=lan000 --changelog-file=mychangelog002.sql --search-path=changelog status --verbose'
                                                 			 
 
                        }

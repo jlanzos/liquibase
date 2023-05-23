@@ -27,7 +27,7 @@ pipeline {
                            bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\sqlite002":/liquibase/changelog liquibase/liquibase --show-banner=False  --url="jdbc:sqlserver://192.168.1.139:1433;databaseName=Vueling_SAP;queryTimeout=5;trustServerCertificate=true;integratedsecurity=False;defaultSchemaName=dbo" --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=internal/lib/mssql-jdbc.jar --username=sa --password=lan000 --changelog-file=mychangelog.sql --search-path=changelog status --verbose'						 
                         }   
 						if (params.DDBB == 'sqlite003') {
-                           bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\sqlite003":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties status --verbose'							   
+                           bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\sqlite003":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog status --verbose'							   
                         }      
                         else {
                            bat "echo 'DDBB ${params.DDBB} not parametrized!'"

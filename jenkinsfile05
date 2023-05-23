@@ -36,7 +36,7 @@ pipeline {
                        }
                  }
            }
-         }		 
+      		 
 		 stage('Validate') {
             steps {
                 script {
@@ -55,7 +55,7 @@ pipeline {
                         }						   
                        }
                  }
-           }
+           
          }		
          stage('UpdateSQL') { 
             steps {
@@ -75,7 +75,7 @@ pipeline {
                         }						   
                        }
                  }
-           }
+           
          }		 		 
    	
 }	

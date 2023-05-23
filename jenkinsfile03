@@ -8,8 +8,8 @@ pipeline {
         }
 	  stage('Pull Remote Repo') {
             steps {
-               bat("copy c:\\Varios\\Vueling\\liquibase\\${params.DDBB}\\mychangelog.sql c:\\Varios\\Vueling\\liquibase\\sqlite002\\mychangelog.sql ")
-               dir('c:\\Varios\\Vueling\\liquibase\\sqlite002'){
+               bat("copy c:\\Varios\\Vueling\\liquibase\\sqlite001\\mychangelog.sql c:\\Varios\\Vueling\\liquibase\\${params.DDBB}\\mychangelog.sql ")
+               dir('c:\\Varios\\Vueling\\liquibase\\${params.DDBB}'){
                    bat "git add *.sql"
                    bat "git add jenkinsfile*"
                    bat "git add -u"
@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Commit local repo') {
             steps {
-               dir('c:\\Varios\\Vueling\\liquibase\\sqlite002'){
+               dir('c:\\Varios\\Vueling\\liquibase\\${params.DDBB}'){
                     bat 'git commit -am "Add Changes" '
                }
             }
@@ -30,7 +30,7 @@ pipeline {
         stage('Push to Remote Repo') {
             steps {
                //bat "git branch -a "
-               dir('c:\\Varios\\Vueling\\liquibase\\sqlite002'){
+               dir('c:\\Varios\\Vueling\\liquibase\\${params.DDBB}'){
                    bat 'git remote set-url origin "https://github.com/jlanzos/liquibase.git"  '
                    withCredentials([gitUsernamePassword(credentialsId: 'jlg-id', gitToolName: 'Default')]) {
                     bat "git push -u origin main"
@@ -52,7 +52,7 @@ pipeline {
         stage('Status') {
             steps {
                 script {
-                         bat 'docker run --rm  -v c:\\Varios\\Vueling\\liquibase\\sqlite002:/liquibase/changelog liquibase/liquibase --show-banner=False  --url="jdbc:sqlserver://192.168.1.139:1433;databaseName=Vueling_SAP;queryTimeout=5;trustServerCertificate=true;integratedsecurity=False;defaultSchemaName=dbo" --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=internal/lib/mssql-jdbc.jar --username=sa --password=lan000 --changelog-file=mychangelog.sql --search-path=changelog status --verbose'
+                         bat 'docker run --rm  -v c:\\Varios\\Vueling\\liquibase\\${params.DDBB}:/liquibase/changelog liquibase/liquibase --show-banner=False  --url="jdbc:sqlserver://192.168.1.139:1433;databaseName=Vueling_SAP;queryTimeout=5;trustServerCertificate=true;integratedsecurity=False;defaultSchemaName=dbo" --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=internal/lib/mssql-jdbc.jar --username=sa --password=lan000 --changelog-file=mychangelog.sql --search-path=changelog status --verbose'
                        }
                  }
            }

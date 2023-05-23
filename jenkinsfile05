@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    stages {
+        stage('Info') {
+            steps {
+                echo "Working with DDBB: $params.DDBB"
+                
+               }
+        }
+	  
+	
+        stage('Version') {
+            steps {
+                script {
+                         bat "docker run --rm   liquibase/liquibase --show-banner=False --version"
+                       }
+                 }
+           }
+       
+        stage('Status') {
+            steps {
+                script {
+				         
+                        if (params.DDBB == 'DDBB01') {
+                           bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\SQLServer\\DDBB01\\config":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog status --verbose'							   
+                        }  	
+                        if (params.DDBB == 'DDBB02') {
+                           bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\SQLServer\\DDBB02\\config":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog status --verbose'							   
+                        }  
+                        if (params.DDBB == 'DDBB03') {
+                           bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\SQLServer\\DDBB03\\config":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog status --verbose'							   
+                        }  						
+                        else {
+                           bat "echo 'DDBB ${params.DDBB} not parametrized!'"
+                        }						   
+                       }
+                 }
+           }
+         }		 
+   	
+}	
+ 

@@ -5,7 +5,6 @@ pipeline {
             steps {
                 echo "Hello ${params.DDBB}"
                }
-            }
         }
 	  stage('Pull Remote Repo') {
             steps {

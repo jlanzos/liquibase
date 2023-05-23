@@ -4,10 +4,8 @@ pipeline {
         stage("Info") {
             steps {
                 echo "Working with DDBB: $params.DDBB"
-                
                }
         }
-	  
 	
         stage('Version') {
             steps {
@@ -76,7 +74,8 @@ pipeline {
                        }
                  }
            
-         }		 		 
+         }	
+    }		 
    	
 }	
  

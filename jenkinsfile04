@@ -18,14 +18,14 @@ pipeline {
            }
        
         stage('Status') {
-            when {
-                expression { 
-                   return params.DDBB == 'sqlite002'
-                }
-            }
             steps {
                 script {
-                         bat 'docker run --rm  -v c:\\Varios\\Vueling\\liquibase\\liquibase002:/liquibase/changelog liquibase/liquibase --show-banner=False  --url="jdbc:sqlserver://192.168.1.139:1433;databaseName=Vueling_SAP;queryTimeout=5;trustServerCertificate=true;integratedsecurity=False;defaultSchemaName=dbo" --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=internal/lib/mssql-jdbc.jar --username=sa --password=lan000 --changelog-file=mychangelog.sql --search-path=changelog status --verbose'
+				        if (params.DDBB == 'sqlite002') {
+                           bat 'docker run --rm  -v c:\\Varios\\Vueling\\liquibase\\sqlite002:/liquibase/changelog liquibase/liquibase --show-banner=False  --url="jdbc:sqlserver://192.168.1.139:1433;databaseName=Vueling_SAP;queryTimeout=5;trustServerCertificate=true;integratedsecurity=False;defaultSchemaName=dbo" --driver=com.microsoft.sqlserver.jdbc.SQLServerDriver --classpath=internal/lib/mssql-jdbc.jar --username=sa --password=lan000 --changelog-file=mychangelog.sql --search-path=changelog status --verbose'						 
+                           }
+                        else {
+                          sh "echo 'Hello from ${params.DDBB} branch!'"
+                        }						   
                        }
                  }
            }

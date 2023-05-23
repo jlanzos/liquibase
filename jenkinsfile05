@@ -28,9 +28,7 @@ pipeline {
                         if (params.DDBB == 'DDBB03') {
                            bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\SQLServer\\DDBB03\\config":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog status --verbose'							   
                         }  						
-                        else {
-                           bat "echo 'DDBB ${params.DDBB} not parametrized!'"
-                        }						   
+                        					   
                        }
                  }
            }
@@ -48,9 +46,7 @@ pipeline {
                         if (params.DDBB == 'DDBB03') {
                            bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\SQLServer\\DDBB03\\config":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog validate'							   
                         }  						
-                        else {
-                           bat "echo 'DDBB ${params.DDBB} not parametrized!'"
-                        }						   
+                        					   
                        }
                  }
            
@@ -68,9 +64,7 @@ pipeline {
                         if (params.DDBB == 'DDBB03') {
                            bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\SQLServer\\DDBB03\\config":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog update-sql'							   
                         }  						
-                        else {
-                           bat "echo 'DDBB ${params.DDBB} not parametrized!'"
-                        }						   
+                        				   
                        }
                  }
            

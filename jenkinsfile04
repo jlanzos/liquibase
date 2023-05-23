@@ -28,7 +28,10 @@ pipeline {
                         }   
 						if (params.DDBB == 'sqlite003') {
                            bat 'docker run --rm  -v c:"\\Varios\\Vueling\\liquibase\\sqlite003":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog status --verbose'							   
-                        }      
+                        }  
+                        if (params.DDBB == 'DDBB01') {
+                           bat 'docker run --rm  -v c:"\\Varios\\Vueling\\SQLServer\\DDBB01\\config":/liquibase/changelog liquibase/liquibase --show-banner=False  --defaultsFile=/liquibase/changelog/liquibase.properties --search-path=changelog status --verbose'							   
+                        }  						
                         else {
                            bat "echo 'DDBB ${params.DDBB} not parametrized!'"
                         }						   

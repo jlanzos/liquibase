@@ -8,8 +8,8 @@ pipeline {
         }
 	  stage('Pull Remote Repo') {
             steps {
-               bat("copy c:\\Varios\\Vueling\\liquibase\\sqlite001\\mychangelog.sql c:\\Varios\\Vueling\\liquibase\\${params.DDBB}\\mychangelog.sql ")
-               dir('c:\\Varios\\Vueling\\liquibase\\${params.DDBB}'){
+               bat("copy c:\\Varios\\Vueling\\liquibase\\sqlite001\\mychangelog.sql c:\\Varios\\Vueling\\liquibase\\sqlite002\\mychangelog.sql ")
+               dir('c:\\Varios\\Vueling\\liquibase\\sqlite002'){
                    bat "git add *.sql"
                    bat "git add jenkinsfile*"
                    bat "git add -u"
@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Commit local repo') {
             steps {
-               dir('c:\\Varios\\Vueling\\liquibase\\${params.DDBB}'){
+               dir('c:\\Varios\\Vueling\\liquibase\\sqlite002'){
                     bat 'git commit -am "Add Changes" '
                }
             }
@@ -30,7 +30,7 @@ pipeline {
         stage('Push to Remote Repo') {
             steps {
                //bat "git branch -a "
-               dir('c:\\Varios\\Vueling\\liquibase\\${params.DDBB}'){
+               dir('c:\\Varios\\Vueling\\liquibase\\sqlite002'){
                    bat 'git remote set-url origin "https://github.com/jlanzos/liquibase.git"  '
                    withCredentials([gitUsernamePassword(credentialsId: 'jlg-id', gitToolName: 'Default')]) {
                     bat "git push -u origin main"

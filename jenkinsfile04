@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Info') {
             steps {
-                echo "Workin with DDBB: $params.DDBB"
-                bat 'echo $params.DDB'
+                //echo "Working with DDBB: $params.DDBB"
+                env='echo "Working in '+ ${params.DDBB}+'"'
+                echo  ${env}
                }
         }
 	  
